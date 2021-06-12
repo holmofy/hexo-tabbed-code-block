@@ -17,7 +17,7 @@ const $ = require('jquery')(window);
  * @param {String} content
  * @returns {string}
  */
-function tabbedCodeBlock(arg, content, highlight) {
+function tabbedCodeBlock(arg, content, config) {
   const matches = [];
   let match;
   let caption = '';
@@ -35,13 +35,13 @@ function tabbedCodeBlock(arg, content, highlight) {
     // trim code
     code = stripIndent(code).trim();
 
-    if (highlight.enable) {
+    if (config.enable) {
       // highlight code
       code = highlight(code, {
         lang: lang,
-        gutter: highlight.line_number,
-        tab: highlight.tab_replace,
-        autoDetect: highlight.auto_detect
+        gutter: config.line_number,
+        tab: config.tab_replace,
+        autoDetect: config.auto_detect
       });
     } else {
       code = code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
