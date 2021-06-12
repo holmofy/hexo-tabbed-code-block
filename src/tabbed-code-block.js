@@ -21,7 +21,6 @@ function tabbedCodeBlock(args, content) {
   const arg = args.join(' ');
   const config = hexo.config.highlight || {};
   const matches = [];
-  let html;
   let match;
   let caption = '';
   let codes = '';
@@ -34,8 +33,7 @@ function tabbedCodeBlock(args, content) {
   // create tabs and tabs content
   for (let i = 0; i < matches.length; i += 2) {
     const lang = matches[i];
-    const code = matches[i + 1];
-    const $code;
+    let code = matches[i + 1];
     // trim code
     code = stripIndent(code).trim();
 
@@ -47,22 +45,20 @@ function tabbedCodeBlock(args, content) {
         tab: config.tab_replace,
         autoDetect: config.auto_detect
       });
-    }
-    else {
+    } else {
       code = code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
       code = '<pre><code>' + code + '</code></pre>';
     }
 
     // used to parse HTML code and ease DOM manipulation
-    $code = $('<div>').append(code).find('>:first-child');
+    const $code = $('<div>').append(code).find('>:first-child');
     // add tab
     // active the first tab
     // display the first code block
     if (i === 0) {
       caption += '<li class="tab active">' + lang + '</li>';
       $code.css('display', 'block');
-    }
-    else {
+    } else {
       $code.css('display', 'none');
       caption += '<li class="tab">' + lang + '</li>';
     }
@@ -75,8 +71,7 @@ function tabbedCodeBlock(args, content) {
   if (rCaptionUrl.test(arg)) {
     match = arg.match(rCaptionUrl);
     caption = '<a href="' + match[2] + match[3] + '">' + match[1] + '</a>' + caption;
-  }
-  else if (rCaption.test(arg)) {
+  } else if (rCaption.test(arg)) {
     match = arg.match(rCaption);
     caption = '<span>' + match[1] + '</span>' + caption;
   }
@@ -84,7 +79,7 @@ function tabbedCodeBlock(args, content) {
   codes = '<div class="tabs-content">' + codes + '</div>';
   // wrap caption
   caption = '<figcaption>' + caption + '</figcaption>';
-  html = '<figure class="codeblock codeblock--tabbed">' + caption + codes + '</figure>';
+  const html = '<figure class="codeblock codeblock--tabbed">' + caption + codes + '</figure>';
   return html;
 }
 
