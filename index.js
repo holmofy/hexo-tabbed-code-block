@@ -77,7 +77,7 @@ hexo.extend.filter.register('after_render:html', html => {
     figure figcaption .tabs .tab {
       cursor: pointer;
       list-style: none;
-      margin: 5px 15px;
+      padding: 5px 15px;
     }
     figure figcaption .tabs .tab.active {
       background: #2d2d2d;
@@ -86,7 +86,7 @@ hexo.extend.filter.register('after_render:html', html => {
   `;
   const js = `
   $(document).ready(function() {
-    $('.highlight.multi').find('.tab').click(function() {
+    $('figure.codeblock').find('.tab').click(function() {
         var $codeblock = $(this).parent().parent().parent();
         var $tab = $(this);
         // remove "active" css class on all tabs
