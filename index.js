@@ -49,10 +49,10 @@ hexo.extend.filter.register('before_post_render', data => {
   if (!ignore(data)) {
     data.content = data.content.replace(codeBlockRegex, (raw, start, startQuote, lang, content, endQuote, end) => {
       return start
-        + '{% tabbed_codeblock %}'
-        + '<!-- tab ' + lang + ' -->'
+        + '{% tabbed_codeblock %}\n'
+        + '<!-- tab ' + lang + ' -->\n'
         + content
-        + '<!-- endtab -->'
+        + '<!-- endtab -->\n'
         + '{% endtabbed_codeblock %}'
         + end;
     });
