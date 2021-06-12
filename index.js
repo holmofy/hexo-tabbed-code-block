@@ -2,12 +2,15 @@
 
 const tabbedCodeBlock = require('./src/tabbed-code-block');
 
-hexo.config.tabbedCodeBlock = Object.assign({
+hexo.config.highlight = Object.assign({
   enable: true,
+  line_number: true,
+  tab_replace: '    ',
+  tabbed: true,
   merge: true
-}, hexo.config.tabbedCodeBlock);
+}, hexo.config.highlight);
 
-const config = hexo.config.tabbedCodeBlock;
+const config = hexo.config.highlight;
 
 const codeBlockRegex = /(\s*)(```) *(\S+) *\n?([\s\S]+?)\s*(\2)(\n+|$)/g;
 
@@ -39,8 +42,7 @@ function ignore(data) {
  *   {% endtabbed_codeblock %}
  */
 hexo.extend.tag.register('tabbed_codeblock', (args, content) => {
-  const config = hexo.config;
-  return tabbedCodeBlock(args.join(' '), content, config.highlight || {});
+  return tabbedCodeBlock(args.join(' '), content, hexo.config.highlight || {});
 }, { ends: true });
 
 hexo.extend.filter.register('before_post_render', data => {

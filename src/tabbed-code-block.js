@@ -11,12 +11,6 @@ const rTab = /<!--\s*tab (\w*)\s*-->\n([\w\W\s\S]*?)<!--\s*endtab\s*-->/g;
 const window = (new JSDOM('')).window;
 const $ = require('jquery')(window);
 
-/**
- * Tabbed code block
- * @param {Array} arg
- * @param {String} content
- * @returns {string}
- */
 function tabbedCodeBlock(arg, content, config) {
   const matches = [];
   let match;
@@ -77,8 +71,7 @@ function tabbedCodeBlock(arg, content, config) {
   codes = '<div class="tabs-content">' + codes + '</div>';
   // wrap caption
   caption = '<figcaption>' + caption + '</figcaption>';
-  const html = '<figure class="codeblock codeblock--tabbed">' + caption + codes + '</figure>';
-  return html;
+  return '<figure class="codeblock codeblock--tabbed">' + caption + codes + '</figure>';
 }
 
 module.exports = tabbedCodeBlock;
