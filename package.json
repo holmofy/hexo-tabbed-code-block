@@ -1,0 +1,33 @@
+{
+  "name": "hexo-tabbed-code-block",
+  "version": "1.0.4",
+  "description": "An enhanced version of the Fenced code blocks plug-in can support tabbed code block.",
+  "main": "index.js",
+  "scripts": {
+    "eslint": "eslint .",
+    "test": "mocha test/index.js"
+  },
+  "repository": "holmofy/tabbed-code-block",
+  "keywords": [
+    "hexo",
+    "plugin",
+    "code blocks",
+    "tabbed"
+  ],
+  "author": "Holmofy Hu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/holmofy/hexo-tabbed-code-block/issues"
+  },
+  "homepage": "https://github.com/holmofy/hexo-tabbed-code-block#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^7.5.0",
+    "eslint-config-hexo": "^4.1.0",
+    "mocha": "^3.1.2",
+    "hexo": "hexojs/hexo"
+  },
+  "dependencies": {
+    "hexo-util": "^0.6.3"
+  }
+}
