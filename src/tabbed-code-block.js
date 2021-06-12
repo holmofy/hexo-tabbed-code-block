@@ -1,15 +1,15 @@
 'use strict';
 
-var util = require('hexo-util');
-var highlight = util.highlight;
-var stripIndent = require('strip-indent');
-var JSDOM = require('jsdom').JSDOM;
-var rCaptionUrl = /(\S[\S\s]*)\s+(https?:\/\/)(\S+)/i;
-var rCaption = /(\S[\S\s]*)/;
-var rTab = /<!--\s*tab (\w*)\s*-->\n([\w\W\s\S]*?)<!--\s*endtab\s*-->/g;
+const util = require('hexo-util');
+const highlight = util.highlight;
+const stripIndent = require('strip-indent');
+const JSDOM = require('jsdom').JSDOM;
+const rCaptionUrl = /(\S[\S\s]*)\s+(https?:\/\/)(\S+)/i;
+const rCaption = /(\S[\S\s]*)/;
+const rTab = /<!--\s*tab (\w*)\s*-->\n([\w\W\s\S]*?)<!--\s*endtab\s*-->/g;
 // create a window with a document to use jQuery library
-var window = (new JSDOM('')).window;
-var $ = require('jquery')(window);
+const window = (new JSDOM('')).window;
+const $ = require('jquery')(window);
 
 /**
  * Tabbed code block
@@ -18,13 +18,13 @@ var $ = require('jquery')(window);
  * @returns {string}
  */
 function tabbedCodeBlock(args, content) {
-  var arg = args.join(' ');
-  var config = hexo.config.highlight || {};
-  var html;
-  var matches = [];
-  var match;
-  var caption = '';
-  var codes = '';
+  const arg = args.join(' ');
+  const config = hexo.config.highlight || {};
+  const matches = [];
+  let html;
+  let match;
+  let caption = '';
+  let codes = '';
 
   // extract languages and source codes
   while ((match = rTab.exec(content))) {
@@ -32,10 +32,10 @@ function tabbedCodeBlock(args, content) {
     matches.push(match[2]);
   }
   // create tabs and tabs content
-  for (var i = 0; i < matches.length; i += 2) {
-    var lang = matches[i];
-    var code = matches[i + 1];
-    var $code;
+  for (let i = 0; i < matches.length; i += 2) {
+    const lang = matches[i];
+    const code = matches[i + 1];
+    const $code;
     // trim code
     code = stripIndent(code).trim();
 

@@ -1,11 +1,12 @@
-/* eslint-disable no-unused-vars */
-var should = require('chai').should();
-/* eslint-enable no-unused-vars */
-var tabbedCodeBlock = require('../src/tabbed-code-block');
+'use strict';
 
-describe('tabbedCodeBlock', function () {
-  it('render (basic)', function () {
-    var content = tabbedCodeBlock(`
+// eslint-disable-next-line node/no-unpublished-require
+require('chai').should();
+
+describe('tabbedCodeBlock', () => {
+  const tabbedCodeBlock = require('../src/tabbed-code-block');
+  it('render (basic)', () => {
+    const content = tabbedCodeBlock(`
       \`\`\`java
       System.out.println("Hello World");
       \`\`\`
@@ -14,11 +15,14 @@ describe('tabbedCodeBlock', function () {
     `);
   });
 
-  it('render (merge)', function () {
-    var content = tabbedCodeBlock(`
+  it('render (merge)', () => {
+    const content = tabbedCodeBlock(`
       \`\`\`java
       System.out.println("Hello World");
       \`\`\`
+      \`\`\`javascript
+      console.log("Hello World");
+      \`\`\
     `);
     content.should.equal(`
      `);
