@@ -28,6 +28,9 @@
     "hexo": "hexojs/hexo"
   },
   "dependencies": {
-    "hexo-util": "^0.6.3"
+    "hexo-util": "^0.6.3",
+    "jsdom": "16.4.0",
+    "jquery": "3.5.1",
+    "strip-indent": "3.0.0"
   }
 }
