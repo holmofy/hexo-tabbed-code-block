@@ -1,12 +1,13 @@
 'use strict';
 
-const util = require('hexo-util');
-const highlight = util.highlight;
+const highlight = require('hexo-util').highlight;
 const stripIndent = require('strip-indent');
 const JSDOM = require('jsdom').JSDOM;
+
 const rCaptionUrl = /(\S[\S\s]*)\s+(https?:\/\/)(\S+)/i;
 const rCaption = /(\S[\S\s]*)/;
 const rTab = /<!--\s*tab (\w*)\s*-->\n([\w\W\s\S]*?)<!--\s*endtab\s*-->/g;
+
 // create a window with a document to use jQuery library
 const window = (new JSDOM('')).window;
 const $ = require('jquery')(window);

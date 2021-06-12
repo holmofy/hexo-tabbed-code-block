@@ -3,7 +3,7 @@
 const tabbedCodeBlock = require('./src/tabbed-code-block');
 
 hexo.config.highlight = Object.assign({
-  enable: true,
+  enable: false,
   line_number: true,
   tab_replace: '    ',
   tabbed: true,
