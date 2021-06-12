@@ -51,15 +51,13 @@ hexo.extend.filter.register('before_post_render', data => {
   }
   if (!ignore(data)) {
     data.content = data.content.replace(codeBlockRegex, (raw, start, startQuote, lang, content, endQuote, end) => {
-      return `
-         ${start}
-         {% tabbed_codeblock %}
-             <!-- tab ${lang} -->
-                 ${content}
-             <!-- endtab -->
-         {% endtabbed_codeblock %}
-         ${end}
-      `;
+      return start
+        + '{% tabbed_codeblock %}'
+        + '<!-- tab ${lang} -->'
+        + content
+        + '<!-- endtab -->'
+        + '{% endtabbed_codeblock %}'
+        + end;
     });
     // merge two adjacent blocks
     if (config.merge) {
