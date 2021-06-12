@@ -40,7 +40,9 @@ function ignore(data) {
  */
 hexo.extend.tag.register('tabbed_codeblock', (args, content) => {
   return tabbedCodeBlock(args.join(' '), content, hexo.config.highlight || {});
-}, { ends: true });
+}, {
+  ends: true
+});
 
 hexo.extend.filter.register('before_post_render', data => {
   if (!config.enable && !data.tabbedCodeBlock) {
@@ -48,13 +50,13 @@ hexo.extend.filter.register('before_post_render', data => {
   }
   if (!ignore(data)) {
     data.content = data.content.replace(codeBlockRegex, (raw, start, startQuote, lang, content, endQuote, end) => {
-      return start
-        + '{% tabbed_codeblock %}\n'
-        + '<!-- tab ' + lang + ' -->\n'
-        + content
-        + '<!-- endtab -->\n'
-        + '{% endtabbed_codeblock %}'
-        + end;
+      return start +
+        '{% tabbed_codeblock %}\n' +
+        '<!-- tab ' + lang + ' -->\n' +
+        content +
+        '<!-- endtab -->\n' +
+        '{% endtabbed_codeblock %}' +
+        end;
     });
     // merge two adjacent blocks
     if (config.merge) {
@@ -62,3 +64,20 @@ hexo.extend.filter.register('before_post_render', data => {
     }
   }
 }, 9);
+
+hexo.extend.filter.register('after_post_render', html => {
+  const css = `
+    figure figcaption .tabs {
+      display: flex;
+    }
+    figure figcaption .tabs .tab {
+      cursor: pointer;
+      list-style: none;
+      margin: 5px 10px;
+    }
+    figure figcaption .tabs .tab.active {
+      background: #2d2d2d;
+    }
+  `;
+  return html.replace(/<head>(?!<\/head>).+?<\/head>/s, str => str.replace('</head>', `<style>${css}</style></head>`));
+});
