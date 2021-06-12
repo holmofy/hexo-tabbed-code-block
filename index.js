@@ -2,15 +2,12 @@
 
 const tabbedCodeBlock = require('./src/tabbed-code-block');
 
-hexo.config.highlight = Object.assign({
+hexo.config.tabbedCodeBlock = Object.assign({
   enable: false,
-  line_number: true,
-  tab_replace: '    ',
-  tabbed: true,
   merge: true
-}, hexo.config.highlight);
+}, hexo.config.tabbedCodeBlock);
 
-const config = hexo.config.highlight;
+const config = hexo.config.tabbedCodeBlock;
 
 const codeBlockRegex = /(\s*)(```) *([^\n]+) *\n?([\s\S]+?)\s*(\2)(\n+|$)/g;
 
