@@ -67,17 +67,39 @@ hexo.extend.filter.register('before_post_render', data => {
 
 hexo.extend.filter.register('after_render:html', html => {
   const css = `
+    figure.codeblock {
+       margin: 0;
+    }
     figure figcaption .tabs {
       display: flex;
+      margin: 0;
     }
     figure figcaption .tabs .tab {
       cursor: pointer;
       list-style: none;
-      margin: 5px 10px;
+      margin: 5px 15px;
     }
     figure figcaption .tabs .tab.active {
       background: #2d2d2d;
+      color: white;
     }
   `;
-  return html.replace(/<head>(?!<\/head>).+?<\/head>/s, str => str.replace('</head>', `<style>${css}</style></head>`));
+  const js = `
+  $(document).ready(function() {
+    $('.highlight.multi').find('.tab').click(function() {
+        var $codeblock = $(this).parent().parent().parent();
+        var $tab = $(this);
+        // remove "active" css class on all tabs
+        $tab.siblings().removeClass('active');
+        // add "active" css class on the clicked tab
+        $tab.addClass('active');
+        // hide all tab contents
+        $codeblock.find('.highlight').hide();
+        // show only the right one
+        $codeblock.find('.highlight.' + $tab.text()).show();
+    });
+  });
+  `;
+  return html.replace(/<head>(?!<\/head>).+?<\/head>/s, str => str.replace('</head>', `<style>${css}</style></head>`))
+    .replace(/<\/body>/s, `<script>${js}</script></body>`);
 });
