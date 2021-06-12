@@ -12,7 +12,7 @@ hexo.config.highlight = Object.assign({
 
 const config = hexo.config.highlight;
 
-const codeBlockRegex = /(\s*)(```) *(\S+) *\n?([\s\S]+?)\s*(\2)(\n+|$)/g;
+const codeBlockRegex = /(\s*)(```) *([^\n]+) *\n?([\s\S]+?)\s*(\2)(\n+|$)/g;
 
 function ignore(data) {
   const source = data.source;
@@ -54,7 +54,7 @@ hexo.extend.filter.register('before_post_render', data => {
       return `
          ${start}
          {% tabbed_codeblock %}
-             <!-- tab [${lang}] -->
+             <!-- tab ${lang} -->
                  ${content}
              <!-- endtab -->
          {% endtabbed_codeblock %}
