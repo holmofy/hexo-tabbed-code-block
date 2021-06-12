@@ -13,12 +13,11 @@ const $ = require('jquery')(window);
 
 /**
  * Tabbed code block
- * @param {Array} args
+ * @param {Array} arg
  * @param {String} content
  * @returns {string}
  */
-function tabbedCodeBlock(args, content) {
-  const arg = args.join(' ');
+function tabbedCodeBlock(arg, content) {
   const config = hexo.config.highlight || {};
   const matches = [];
   let match;

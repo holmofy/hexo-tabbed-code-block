@@ -38,7 +38,10 @@ function ignore(data) {
  *       <!-- endtab -->
  *   {% endtabbed_codeblock %}
  */
-hexo.extend.tag.register('tabbed_codeblock', tabbedCodeBlock, { ends: true });
+hexo.extend.tag.register('tabbed_codeblock', (args, content) => {
+  const config = hexo.config;
+  return tabbedCodeBlock(args.join(' '), content, config);
+}, { ends: true });
 
 hexo.extend.filter.register('before_post_render', data => {
   if (!config.enable && !data.tabbedCodeBlock) {
