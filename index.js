@@ -50,7 +50,7 @@ hexo.extend.filter.register('before_post_render', data => {
     data.content = data.content.replace(codeBlockRegex, (raw, start, startQuote, lang, content, endQuote, end) => {
       return start
         + '{% tabbed_codeblock %}'
-        + '<!-- tab ${lang} -->'
+        + '<!-- tab ' + lang + ' -->'
         + content
         + '<!-- endtab -->'
         + '{% endtabbed_codeblock %}'
