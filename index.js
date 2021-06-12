@@ -1,5 +1,6 @@
+'use strict';
+
 const tabbedCodeBlock = require('./src/tabbed-code-block');
-const util = require('hexo-util');
 
 hexo.config.tabbedCodeBlock = Object.assign({
   enable: true,
@@ -11,8 +12,8 @@ const config = hexo.config.tabbedCodeBlock;
 const codeBlockRegex = /(\s*)(```) *(\S+) *\n?([\s\S]+?)\s*(\2)(\n+|$)/g;
 
 function ignore(data) {
-  let source = data.source;
-  let ext = source.substring(source.lastIndexOf('.')).toLowerCase();
+  const source = data.source;
+  const ext = source.substring(source.lastIndexOf('.')).toLowerCase();
   return ['.js', '.css', '.html', '.htm'].indexOf(ext) > -1;
 }
 
@@ -39,7 +40,7 @@ function ignore(data) {
  */
 hexo.extend.tag.register('tabbed_codeblock', tabbedCodeBlock, { ends: true });
 
-hexo.extend.filter.register('before_post_render', (data) => {
+hexo.extend.filter.register('before_post_render', data => {
   if (!config.enable && !data.tabbedCodeBlock) {
     return;
   }
@@ -57,7 +58,7 @@ hexo.extend.filter.register('before_post_render', (data) => {
     });
     // merge two adjacent blocks
     if (config.merge) {
-      data.content = data.content.replace(/{% endtabbed_codeblock %}\s*{% tabbed_codeblock %}/g, "");
+      data.content = data.content.replace(/{% endtabbed_codeblock %}\s*{% tabbed_codeblock %}/g, '');
     }
   }
-}, 10);
+}, 9);
