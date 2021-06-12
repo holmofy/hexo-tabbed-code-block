@@ -65,7 +65,7 @@ hexo.extend.filter.register('before_post_render', data => {
   }
 }, 9);
 
-hexo.extend.filter.register('after_post_render', html => {
+hexo.extend.filter.register('after_render:html', html => {
   const css = `
     figure figcaption .tabs {
       display: flex;
