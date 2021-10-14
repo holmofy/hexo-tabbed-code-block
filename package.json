@@ -30,7 +30,7 @@
   "dependencies": {
     "jsdom": "16.4.0",
     "jquery": "3.5.1",
-    "hexo-util": "^2.5.0"
+    "hexo-util": "^2.5.0",
     "strip-indent": "3.0.0"
   }
 }
