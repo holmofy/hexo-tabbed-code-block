@@ -6,7 +6,7 @@ const JSDOM = require('jsdom').JSDOM;
 
 const rCaptionUrl = /(\S[\S\s]*)\s+(https?:\/\/)(\S+)/i;
 const rCaption = /(\S[\S\s]*)/;
-const rTab = /<!--\s*tab (\w*)\s*-->\n([\w\W\s\S]*?)<!--\s*endtab\s*-->/g;
+const rTab = /<!--\s*tab ([\w\s]*?)\s*-->\n([\w\W\s\S]*?)<!--\s*endtab\s*-->/g;
 
 // create a window with a document to use jQuery library
 const window = (new JSDOM('')).window;
@@ -25,7 +25,10 @@ function tabbedCodeBlock(arg, content, config) {
   }
   // create tabs and tabs content
   for (let i = 0; i < matches.length; i += 2) {
-    const lang = matches[i];
+    const backtickLine = /\s*(\w*)(?:\s+(\w*))?\s*/g.exec(matches[i]);
+    const lang = backtickLine[1];
+    const title = backtickLine[2] || lang;
+    
     let code = matches[i + 1];
     // trim code
     code = stripIndent(code).trim();
@@ -49,11 +52,11 @@ function tabbedCodeBlock(arg, content, config) {
     // active the first tab
     // display the first code block
     if (i === 0) {
-      caption += '<li class="tab active">' + lang + '</li>';
-      $code.css('display', 'block');
+      caption += '<li class="tab active">' + title + '</li>';
+      $code.css('display', 'block').addClass(title);
     } else {
-      $code.css('display', 'none');
-      caption += '<li class="tab">' + lang + '</li>';
+      $code.css('display', 'none').addClass(title);
+      caption += '<li class="tab">' + title + '</li>';
     }
 
     codes += $code.prop('outerHTML');
