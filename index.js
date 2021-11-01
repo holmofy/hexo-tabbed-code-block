@@ -22,7 +22,7 @@ function ignore(data) {
  *
  * Syntax:
  *   {% tabbed_codeblock %}
- *       <!-- tab [lang] -->
+ *       <!-- tab [lang] [title] -->
  *           content
  *       <!-- endtab -->
  *   {% endtabbed_codeblock %}
@@ -31,7 +31,7 @@ function ignore(data) {
  *       <!-- tab js -->
  *           var test = 'test';
  *       <!-- endtab -->
- *       <!-- tab css -->
+ *       <!-- tab css CSS -->
  *           .btn {
  *               color: red;
  *           }
@@ -49,10 +49,10 @@ hexo.extend.filter.register('before_post_render', data => {
     return;
   }
   if (!ignore(data)) {
-    data.content = data.content.replace(codeBlockRegex, (raw, start, startQuote, lang, content, endQuote, end) => {
+    data.content = data.content.replace(codeBlockRegex, (raw, start, startQuote, backtickLine, content, endQuote, end) => {
       return start +
         '{% tabbed_codeblock %}\n' +
-        '<!-- tab ' + lang + ' -->\n' +
+        '<!-- tab ' + backtickLine + ' -->\n' +
         content +
         '<!-- endtab -->\n' +
         '{% endtabbed_codeblock %}' +
