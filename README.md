@@ -7,6 +7,38 @@
 npm install holmofy/hexo-tabbed-code-block
 ```
 
+# config
+
+`_config.yml` add :
+```yaml
+# hexo highlight config
+highlight:
+  enable: true
+  # ref: https://github.com/hexojs/hexo-util#highlightstr-options
+  line_number: true
+  tab_replace: ' '
+  auto_detect: false
+# tabbed code
+tabbedCodeBlock:
+  enable: true
+  merge: true
+```
+
+**note:** tabbedCodeBlock enable means to open globally. Support to enable on a single page, this is more recommended.
+
+````markdown
+---
+title: hello-world
+date: 2021-11-01
+categories: demo
+tabbedCodeBlock: true
+---
+
+```java
+System.out.println("Hello World");
+```
+````
+
 # How to user it?
 
 **multi language code block**
